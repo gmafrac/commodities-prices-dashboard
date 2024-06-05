@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Commodity Price Graph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.4.1/chart.min.js"></script>
+</head>
+<body>
+    <h1>Commodity Price Graph</h1>
+    <div>
+        <label for="commodity-select">Select Commodity:</label>
+        <select id="commodity-select">
+            <option value="Gold">Gold</option>
+            <option value="Silver">Silver</option>
+            <option value="Oil">Oil</option>
+        </select>
+    </div>
+    <canvas id="priceChart" width="800" height="400"></canvas>
+
+    <script>
+        const source = new EventSource('/stream');
+        let chart;
+        let selectedCommodity = 'Gold'; // Default selected commodity
+
+        // Function to update chart with selected commodity data
+        function updateChart(data) {
+            if (!chart) {
+                const ctx = document.getElementById('priceChart').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: [], // Initialize with an empty array
+                        datasets: [{
+                            label: selectedCommodity,
+                            data: [],
+                            borderColor: '#' + (Math.random().toString(16) + '000000').substring(2,8),
+                            fill: false,
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Time'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Price'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Find selected commodity data
+            const selectedData = data.commodities.find(commodity => commodity.name === selectedCommodity);
+            if (selectedData) {
+                // Update chart data
+                chart.data.datasets[0].data = selectedData.prices;
+
+                // Update x-axis labels
+                const newLabels = Array.from({ length: selectedData.prices.length }, (_, i) => i);
+                chart.data.labels = newLabels;
+
+                chart.update();
+            }
+        }
+
+        source.onmessage = function(event) {
+            const data = JSON.parse(event.data);
+            updateChart(data);
+        };
+
+        // Event listener for commodity selection change
+        document.getElementById('commodity-select').addEventListener('change', function(event) {
+            selectedCommodity = event.target.value;
+            chart.destroy(); // Destroy existing chart
+            chart = null; // Reset chart variable
+        });
+    </script>
+</body>
+</html>
