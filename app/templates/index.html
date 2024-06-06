@@ -55,23 +55,25 @@
                     }
                 });
             }
-            
-            // Find selected commodity data
-            const selectedData = data.commodities.find(commodity => commodity.name === selectedCommodity);
-            if (selectedData) {
+    
+            // // Find selected commodity data
+            // const selectedData = data.commodities.find(commodity => commodity.name === selectedCommodity);
+            // if (selectedData) {
                 // Update chart data
-                chart.data.datasets[0].data = selectedData.prices;
-
+                console.log(data)
+                chart.data.datasets[0].data = data;
+                
                 // Update x-axis labels
-                const newLabels = Array.from({ length: selectedData.prices.length }, (_, i) => i);
+                const newLabels = Array.from({ length: data.length }, (_, i) => i);
                 chart.data.labels = newLabels;
 
                 chart.update();
-            }
+            // }
         }
 
         source.onmessage = function(event) {
             const data = JSON.parse(event.data);
+            console.log(data)
             updateChart(data);
         };
 
