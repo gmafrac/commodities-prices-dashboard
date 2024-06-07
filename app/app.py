@@ -7,8 +7,13 @@ from confluent_kafka.admin import AdminClient
 app = Flask(__name__)
 
 kafka_conf = {
-    'bootstrap.servers': 'localhost:9092'
+    'bootstrap.servers': 'kafka:9092'
 }
+
+
+# kafka_conf = {
+#     'bootstrap.servers': 'localhost:9092'
+# }
 admin_client = AdminClient(kafka_conf)
 
 def list_kafka_topics():
@@ -37,11 +42,11 @@ def stream():
     commodity = request.args.get('commodity', 'gold')
     return Response(generate_data_by_commoditie(commodity), mimetype='text/event-stream')
 
-@app.route('/data')
-def data():
-    commodity = request.args.get('commodity', 'gold')
-    prices = get_all_documents_from_collection(commodity)
-    return jsonify(prices)
+# @app.route('/data')
+# def data():
+#     commodity = request.args.get('commodity', 'gold')
+#     prices = get_all_documents_from_collection(commodity)
+#     return jsonify(prices)
 
 if __name__ == '__main__':
     app.run(debug=True)

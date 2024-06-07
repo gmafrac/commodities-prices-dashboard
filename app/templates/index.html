@@ -93,8 +93,11 @@
                             x: {
                                 title: {
                                     display: true,
-                                    text: 'Time'
-                                },
+                                    text: 'Time (s)',
+                                    font: {
+                                        size: 24
+                                    }
+                                    },
                                 ticks: {
                                     maxTicksLimit: 15, 
                                 }
@@ -102,7 +105,10 @@
                             y: {
                                 title: {
                                     display: true,
-                                    text: 'Price'
+                                    text: 'Price (USD)',
+                                    font: {
+                                        size: 24    
+                                    }
                                 }
                             }
                         }
@@ -134,7 +140,7 @@
         document.getElementById('commodity-select').addEventListener('change', function(event) {
             selectedCommodity = event.target.value;
             
-            fetch(`/data?commodity=${selectedCommodity}`).then(response => {
+            fetch(`/stream?commodity=${selectedCommodity}`).then(response => {
                 response.json().then(data => {
                     updateChart(data);
                 });
