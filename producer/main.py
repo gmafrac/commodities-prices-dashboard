@@ -1,6 +1,5 @@
 from utils import * 
-
-# env variables
+import time
 
 commodities_dict = {
     "gold": "GC=F",
