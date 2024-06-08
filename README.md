@@ -2,7 +2,7 @@
 
 This project has been made for the college subject SSC0158 - Computação em Nuvem e Arquitetura Orientadas a Serviços (2024). For this reason, our group made a Cloud Application which we use the Kafka to build a real-time streaming data. In this scenario, the theme of this project is the commoddities price.
  
-## Integrantes do grupo:
+## Group members:
 * Guilherme Mafra da Costa - 11272015
 * João Alexandro Ferraz - 11800441
 * Matheus Baptistella - 11223117

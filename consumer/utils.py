@@ -11,15 +11,14 @@ commodities_dict = {
 }
  
 CONFIG = {
-    'bootstrap.servers': "localhost:9092",
+    'bootstrap.servers': "kafka:9092",
     'group.id': "my-group",
     'auto.offset.reset': 'earliest'
 }
 
-
 def create_collections():
     
-    db_client = MongoClient("localhost", 27017)
+    db_client = MongoClient("mongo", 27017)
     
     db = db_client["commodities_db"]
     collections = {}

@@ -8,7 +8,7 @@ HEADERS = {
 }
 
 CONFIG = {
-    'bootstrap.servers': "localhost:9092",
+    'bootstrap.servers': "kafka:9092",
     'request.timeout.ms': 60000
 }
 

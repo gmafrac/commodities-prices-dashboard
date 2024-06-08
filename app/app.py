@@ -21,7 +21,7 @@ def list_kafka_topics():
     return metadata.topics.keys()
 
 def get_all_documents_from_collection(collection_name):
-    db_client = MongoClient("localhost", 27017)
+    db_client = MongoClient("mongo", 27017)
     mydb = db_client["commodities_db"]
     documents = mydb[collection_name].find({}, {'price': 1, 'time': 1, '_id': 0})
     data = [{'price': float(doc['price']), 'time': doc['time']} for doc in documents]
