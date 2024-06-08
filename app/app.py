@@ -10,10 +10,6 @@ kafka_conf = {
     'bootstrap.servers': 'kafka:9092'
 }
 
-
-# kafka_conf = {
-#     'bootstrap.servers': 'localhost:9092'
-# }
 admin_client = AdminClient(kafka_conf)
 
 def list_kafka_topics():
@@ -48,5 +44,5 @@ def stream():
 #     prices = get_all_documents_from_collection(commodity)
 #     return jsonify(prices)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
