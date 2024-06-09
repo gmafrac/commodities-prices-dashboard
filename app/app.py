@@ -6,17 +6,6 @@ from confluent_kafka.admin import AdminClient
 
 app = Flask(__name__)
 
-kafka_conf = {
-    'bootstrap.servers': 'kafka:9092'
-}
-
-admin_client = AdminClient(kafka_conf)
-
-
-def list_kafka_topics():
-    metadata = admin_client.list_topics(timeout=10)
-    return metadata.topics.keys()
-
 
 def get_all_documents_from_collection(collection_name):
     db_client = MongoClient("mongo", 27017)
@@ -45,4 +34,4 @@ def stream():
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=6053)
