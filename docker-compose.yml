@@ -22,8 +22,6 @@ services:
       
   mongo:
     image: mongo:latest
-    ports:
-      - "27017:27017"
     expose:
       - 27017
     volumes:
@@ -52,9 +50,7 @@ services:
       context: ./app
       dockerfile: Dockerfile
     ports:
-      - "6053:6053"
-    expose:
-      - 6053
+      - "5053:5000"
     depends_on:
       - mongo
       - consumer
