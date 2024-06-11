@@ -6,31 +6,20 @@ from confluent_kafka.admin import AdminClient
 
 app = Flask(__name__)
 
-# def get_all_documents_from_collection(collection_name):
-#     db_client = MongoClient("mongo", 27017)
-#     mydb = db_client["commodities_db"]
-#     documents = mydb[collection_name].find({}, {'price': 1, 'time': 1, '_id': 0}).sort("$natural", -1).limit(100)
-#     data = [{'price': float(doc['price']), 'time': doc['time']} for doc in documents]
-#     data.reverse()
-#     return data
-
-def get_all_documents_from_collection(collection_name, index):
+def get_all_documents_from_collection(collection_name):
     db_client = MongoClient("mongo", 27017)
-    mydb = db_client["commodities_db"]
-    documents = mydb[collection_name].find({}, {'price': 1, 'time': 1, '_id': 0}).skip(index).limit(100)
+    mydb = db_client["commodities_db"] 
+    # documents = mydb[collection_name].find({}, {'price': 1, 'time': 1, '_id': 0}).sort("$natural").limit(100)
+    documents = mydb[collection_name].find({}, {'price': 1, 'time': 1, '_id': 0}).sort("time",-1).limit(100)
     data = [{'price': float(doc['price']), 'time': doc['time']} for doc in documents]
+    data.reverse()
+    
     return data
 
-
 def generate_data_by_commodity(topicname):
-    index = 0
-
     while True:
-        #commodities = get_all_documents_from_collection(topicname)
-        commodities = get_all_documents_from_collection(topicname, index)
-        index+=1
+        commodities = get_all_documents_from_collection(topicname)
         yield f"data: {json.dumps(commodities)}\n\n"
-        time_module.sleep(1)
 
 @app.route('/')
 def index():

@@ -6,11 +6,10 @@ HEADERS = {
     'Content-Type': 'application/json',
 }
 
-CONFIG = {
+CONFIG = {  
     'bootstrap.servers': "kafka:9092",
-    'request.timeout.ms': 60000
+    'request.timeout.ms': 100
 }
-
 
 def create_producer(client_name):
     CONFIG['client.id'] = client_name

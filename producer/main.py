@@ -16,5 +16,12 @@ while True:
     for topic, commoditie in commodities_dict.items():
         url = f"https://query2.finance.yahoo.com/v8/finance/chart/{commoditie}"
         fetch_url(topic, url, producer)
+    time.sleep(3)   
+    
 
-    time.sleep(1)   
+
+
+
+
+
+
