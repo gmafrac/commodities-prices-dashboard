@@ -16,7 +16,7 @@ In this project, a producer retrieves current commodity prices from an API and s
 We have implemented a Docker Compose setup to containerize this application. You can run the project using the following command:
 
 ```
-docker-compose build && docker-compose up
+sudo docker-compose build && sudo docker-compose up
 ```
 
 After this, you can acess the web site in the localhost:5053.
