@@ -19,6 +19,10 @@ We have implemented a Docker Compose setup to containerize this application. You
 docker-compose build && docker-compose up
 ```
 
-After this, you can acess the web site in the localhost:6053.
+After this, you can acess the web site in the localhost:5053.
 
 We have implemented a docker-compose to make this project a containerized application. So, you can run this project through the docker-compose up.
+
+An exemple of our web application can be seen in the image below:
+
+![alt text](image.png)

@@ -143,12 +143,6 @@
         document.getElementById('commodity-select').addEventListener('change', function(event) {
             selectedCommodity = event.target.value;
             
-            // fetch(`/stream?commodity=${selectedCommodity}`).then(response => {
-            //     response.json().then(data => {
-            //         updateChart(data);
-            //     });
-            // });
-
             startEventSource();
         });
 
